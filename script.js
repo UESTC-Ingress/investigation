@@ -900,7 +900,6 @@ function getInput() {
 
 function submitRequest() {
   $("#userInput").hide();
-  clearInput();
   animateWord("loading data", 1);
   setTimeout(function () {
     $.ajax({
@@ -908,6 +907,7 @@ function submitRequest() {
       error: function () {
         animateWord("serv error", 1);
         setTimeout(function () {
+          clearInput();
           $("#userInput").show();
         }, 2000);
       },
@@ -915,11 +915,13 @@ function submitRequest() {
         if (data.error) {
           animateWord("input error", 1);
           setTimeout(function () {
+            clearInput();
             $("#userInput").show();
           }, 2000);
         } else {
           animateWord(data.data.code, 1);
           setTimeout(function () {
+            clearInput();
             $("#userInput").show();
           }, 2000);
         }
